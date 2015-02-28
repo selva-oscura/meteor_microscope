@@ -1,0 +1,1 @@
+Just a quick run-through of meteor/meteorite following Coleman and Greif's Discover Meteor
