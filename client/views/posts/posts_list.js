@@ -15,6 +15,7 @@ var postsData = [
 		url:'http://themeteorbook.com'
 	}
 ];
+// the following helper ties the above postsData to the posts template in posts_list.html, allowing the template to iterate through the above data
 Template.postsList.helpers({
 	posts: postsData
 });
