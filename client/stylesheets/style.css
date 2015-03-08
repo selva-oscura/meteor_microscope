@@ -1,3 +1,9 @@
+header 	ul {
+    list-style-type: none;
+}
+header li{
+	list-style-type:none;
+}
 .grid-block, .main, .post, .comments li, .comment-form {
 	background: #fff;
 	border-radius: 3px;
