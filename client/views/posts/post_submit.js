@@ -5,8 +5,16 @@ Template.postSubmit.events({
 			url: $(e.target).find('[name=url]').val(),
 			title: $(e.target).find('[name=title]').val(),
 			message: $(e.target).find('[name=message]').val()
-		}
-		post._id = Posts.insert(post);
-		Router.go('postPage', post);
+		}		
+		/* deprecated after shift to calling a method named post to use the server to check data */
+		// post._id = Posts.insert(post);
+		// Router.go('postPage', post);
+		/* end of deprecated section */
+		Meteor.call('post', post, function(error, id){
+			if(error){
+				return alert(error.reason);
+			}
+			Router.go('postPage', {_id: id});
+		});
 	}
-})
+});
