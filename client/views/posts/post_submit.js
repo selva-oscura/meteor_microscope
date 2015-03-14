@@ -10,11 +10,14 @@ Template.postSubmit.events({
 		// post._id = Posts.insert(post);
 		// Router.go('postPage', post);
 		/* end of deprecated section */
-		Meteor.call('post', post, function(error, id){
+		Meteor.call('postInsert', post, function(error, result){
 			if(error){
 				return alert(error.reason);
 			}
-			Router.go('postPage', {_id: id});
+			if(result.postExists){
+				alert('This url has already been posted.');
+			}
+			Router.go('postPage', {_id: result._id});
 		});
 	}
 });

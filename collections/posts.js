@@ -13,11 +13,26 @@ Posts.allow({
 });
 end deprecation */
 Meteor.methods({
-	post: function(postAttributes){
-		var user = Meteor.user();
-		postWithSameLink = Posts.findOne({url: postAttributes.url});
+	postInsert: function(postAttributes){
+		check(this.userId, String);
+		check(postAttributes, {
+			title: String,
+			url: String,
+			message: String
+		});
+
+
+		// check that there is no previous post with the same link
+		var postWithSameLink = Posts.findOne({url: postAttributes.url});
+		if(postWithSameLink){
+			return {
+				postExists: true,
+				_id: postWithSameLink._id
+			}
+		}
 
 		// ensure the user is logged in
+		var user = Meteor.user();
 		if(!user){
 			throw new Meteor.Error(401, "You need to log in to make a new post.");
 		}
@@ -27,22 +42,18 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please fill in a title');
 		}
 
-		// check that there is no previous post with the same link
-		if(postAttributes.url && postWithSameLink){
-			throw new Meteor.Error(302, 
-				'This link has already been posted', 
-				postWithSameLink._id);
-		}
 
 		// pick out the whitelisted keys
-		var post = _.extend(_.pick(postAttributes, 'url', 'title', 'message'),{
+		var post = _.extend(postAttributes,{
 			userId: user._id,
 			author: user.username,
-			submitted: new Date().getTime()
+			submitted: new Date()
 		});
 
 		var postId = Posts.insert(post);
 
-		return postId;
+		return {
+			_id: postId
+		};
 	}
 });
