@@ -12,6 +12,12 @@ Posts.allow({
 	}
 });
 end deprecation */
+
+Posts.allow({
+	update: ownsDocument,
+	remove: ownsDocument
+});
+
 Meteor.methods({
 	postInsert: function(postAttributes){
 		check(this.userId, String);
