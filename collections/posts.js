@@ -17,10 +17,8 @@ Meteor.methods({
 		check(this.userId, String);
 		check(postAttributes, {
 			title: String,
-			url: String,
-			message: String
+			url: String
 		});
-
 
 		// check that there is no previous post with the same link
 		var postWithSameLink = Posts.findOne({url: postAttributes.url});
@@ -41,7 +39,6 @@ Meteor.methods({
 		if(!postAttributes.title){
 			throw new Meteor.Error(422, 'Please fill in a title');
 		}
-
 
 		// pick out the whitelisted keys
 		var post = _.extend(postAttributes,{
