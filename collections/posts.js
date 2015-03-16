@@ -53,6 +53,11 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please fill in a title');
 		}
 
+		// ensure the post has a title
+		if(!postAttributes.url){
+			throw new Meteor.Error(422, 'Please fill in the URL');
+		}
+
 		// pick out the whitelisted keys
 		var post = _.extend(postAttributes,{
 			userId: user._id,
