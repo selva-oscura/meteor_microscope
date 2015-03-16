@@ -48,14 +48,14 @@ Meteor.methods({
 			throw new Meteor.Error(401, "You need to log in to make a new post.");
 		}
 
-		// ensure the post has a title
-		if(!postAttributes.title){
-			throw new Meteor.Error(422, 'Please fill in a title');
+		// ensure the post has a url
+		if(!postAttributes.url){
+			throw new Meteor.Error(422, 'Please fill in the URL');
 		}
 
 		// ensure the post has a title
-		if(!postAttributes.url){
-			throw new Meteor.Error(422, 'Please fill in the URL');
+		if(!postAttributes.title){
+			throw new Meteor.Error(422, 'Please fill in a title');
 		}
 
 		// pick out the whitelisted keys
