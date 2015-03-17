@@ -5,5 +5,10 @@
 			{{> comment}}
 		{{/each}}
 	</ul>
+	{{#if currentUser}}
+		{{> commentSubmit}}
+	{{else}}
+		<p>Please log in to leave a commeent.</p>
+	{{/if}}
 	<a href="{{pathFor 'postsList'}}" class='btn'>Return to Main Page</a>
 </template>
