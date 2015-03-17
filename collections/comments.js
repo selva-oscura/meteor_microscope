@@ -11,7 +11,7 @@ Meteor.methods({
 			throw new Meteor.Error(422, 'Please write some content;');
 		}
 		if(!post){
-			throw new Meteor.Error(422, 'Err.k...  Error....  Somehow you are submitting a comment, and the server is clueless re: which post is supposed to get the comment.  Things fall apart, the center can not hold, mere anarchy, blah, blah, blah.....');
+			throw new Meteor.Error(422, 'Erk...  Error....  Somehow you are submitting a comment, and the server is clueless re: which post is supposed to get the comment.  Things fall apart, the center can not hold, mere anarchy, blah, blah, blah.....');
 		}
 		comment = _.extend(commentAttributes, 'postId', 'body', {
 			userId: user._id,
