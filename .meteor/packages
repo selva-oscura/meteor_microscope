@@ -11,3 +11,4 @@ sacha:spin
 accounts-password
 mrt:accounts-ui-bootstrap-dropdown
 msavin:mongol
+multiply:iron-router-progress
