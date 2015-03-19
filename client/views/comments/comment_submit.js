@@ -6,6 +6,8 @@ Template.commentSubmit.events({
 			body: $body.val(),
 			postId: template.data._id
 		};
+		console.log(body);
+		console.log(data);
 		Meteor.call('comment', comment, function(error, commentId){
 			if(error){
 				throwError(error.reason);
