@@ -54,7 +54,18 @@ if (Posts.find().count() === 0) {
 		author: sacha.profile.name,
 		submitted: now - 4.8 * 3600 *1000,
 		body: 'Indubitably!'
-	})
+	});
+
+	for(var i = 0; i<20; i++){
+		Posts.insert({
+			title: 'Test post #'+(i+1),
+			author: sacha.profile.name,
+			userId: sacha._id,
+			url: 'http://google.com/?q=test-'+(i+1),
+			submitted: now-(20-i)*3600*1000,
+			commentsCount: 0
+		});
+	}
 }
 
 //deprecated after adding posts with comments
