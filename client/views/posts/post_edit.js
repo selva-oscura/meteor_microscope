@@ -20,7 +20,9 @@ Template.postEdit.events({
 		if(confirm("Delete this post?")){
 			var currentPostId = this._id;
 			Posts.remove(currentPostId);
-			Router.go('postsList');
+			// deprecated after creating home, newPosts, and bestPosts
+			// Router.go('postsList');
+			Router.go('home');
 		}
 	}
 })

@@ -31,7 +31,7 @@ if (Posts.find().count() === 0) {
 		submitted: now - 4 * 3600 * 1000, 
 		commentsCount: 0,
 		upvoters: [],
-		votes: 0
+		votes: 10
 	});
 
 	var MeteorBookId = Posts.insert({
@@ -42,7 +42,7 @@ if (Posts.find().count() === 0) {
 		submitted: now - 12 * 3600 * 1000,
 		commentsCount: 0,
 		upvoters: [],
-		votes: 0
+		votes: 5
 	});
 
 	// create comments
