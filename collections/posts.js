@@ -80,14 +80,22 @@ Meteor.methods({
 		if(!user){
 			throw new Meteor.Error(401, "You need to log in to vote for this post");
 		}
-		var post = Posts.findOne(postId);
-		if(!post){
-			throw new Meteor.Error(422, "Post not found");
-		}
-		if(_.include(post.upvoters, user._id)){
-			throw new Meteor.Error(422, "You've already voted for this post");
-		}
-		Posts.update(post._id, {
+		// deprecated after being replaced with the subsequent udpate function
+		// var post = Posts.findOne(postId);
+		// if(!post){
+		// 	throw new Meteor.Error(422, "Post not found");
+		// }
+		// if(_.include(post.upvoters, user._id)){
+		// 	throw new Meteor.Error(422, "You've already voted for this post");
+		// }
+		// Posts.update(post._id, {
+		// 	$addToSet: {upvoters: user._id},
+		// 	$inc: {votes: 1}
+		// });
+		Posts.update({
+			_id: postId,
+			upvoters: {$ne: user._id}
+		},{
 			$addToSet: {upvoters: user._id},
 			$inc: {votes: 1}
 		});

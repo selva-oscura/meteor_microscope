@@ -22,8 +22,9 @@ Template.postItem.helpers({
 });
 
 Template.postItem.events({
-	'click .upvotable': function(e){
+	'click .upvote': function(e){
 		e.preventDefault();
+		console.log('upvote attempted on', this._id);
 		Meteor.call('upvote', this._id);
 	}
 });
