@@ -63,7 +63,9 @@ Meteor.methods({
 			userId: user._id,
 			author: user.username,
 			submitted: new Date(), 
-			commentsCount: 0
+			commentsCount: 0,
+			upvoters: [],
+			votes: 0
 		});
 
 		var postId = Posts.insert(post);
@@ -71,5 +73,23 @@ Meteor.methods({
 		return {
 			_id: postId
 		};
+	},
+	upvote: function(postId){
+		var user = Meteor.user();
+		// ensure user is logged in
+		if(!user){
+			throw new Meteor.Error(401, "You need to log in to vote for this post");
+		}
+		var post = Posts.findOne(postId);
+		if(!post){
+			throw new Meteor.Error(422, "Post not found");
+		}
+		if(_.include(post.upvoters, user._id)){
+			throw new Meteor.Error(422, "You've already voted for this post");
+		}
+		Posts.update(post._id, {
+			$addToSet: {upvoters: user._id},
+			$inc: {votes: 1}
+		});
 	}
 });
