@@ -4,11 +4,12 @@
 			<a href="#" class="upvote btn {{upvotedClass}}">&#8657;</a>
 			<h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
 			<p>
-				submitted by {{author}}
-				<a href="{{pathFor 'postPage'}}">{{commentsCount}} comments</a>
+				submitted by {{author}}<br />
 				{{#if ownPost}}
 					<a href="{{pathFor 'postEdit'}}">Edit</a>
 				{{/if}}
+				{{pluralize votes "vote"}},
+				<a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "comment"}}</a>
 			</p>
 		</div>
 		<a href="{{pathFor 'postPage'}}" class="discuss btn">Discuss</a>
